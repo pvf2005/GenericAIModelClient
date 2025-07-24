@@ -9,6 +9,7 @@ public class Response {
 	private Message message=null;
 	private boolean isValid=false;
 	private Exception exception=null;
+	private long durationMillis=0;
 	
 	public Response() {;}
 
@@ -50,6 +51,14 @@ public class Response {
 
 	public void setException(Exception exception) {
 		this.exception = exception;
+	}
+
+	public long getDurationMillis() {
+		return durationMillis;
+	}
+
+	public void setDurationMillis(long duration) {
+		this.durationMillis = duration;
 	}
 	
 	

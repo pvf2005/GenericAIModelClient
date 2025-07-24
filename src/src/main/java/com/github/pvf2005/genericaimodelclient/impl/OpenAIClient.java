@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import com.github.pvf2005.genericaimodelclient.GenericAIModelClient;
 
-public class GrokClient implements GenericClientImpl {
+public class OpenAIClient implements GenericClientImpl {
 	GenericAIModelClient genericClient=null;
 
 	@Override
@@ -28,16 +28,16 @@ public class GrokClient implements GenericClientImpl {
 		JSONArray msgArr=new JSONArray();
 		for(Message msg:req.getMessages()) {
 			JSONObject ob=new JSONObject();
-			ob.put("role", msg.getRole());
+			String role=msg.getRole();
+			if(role.contentEquals("system"))role="developer"; // With o1 models and newer, use developer messages for this purpose instead.
+			ob.put("role", role);
 			ob.put("content", msg.getContent());
 			msgArr.put(ob);
 		}
 		json.put("messages", msgArr);
 		json.put("stream", false);
-
 		if(req.getTemperature()!=null)json.put("temperature", Double.parseDouble(req.getTemperature()));
 		if(req.getSeed()!=null)json.put("seed", Integer.parseInt(req.getSeed()));
-		
 		req.setClientRequestStr(json.toString());
 		
 		HttpClient client = HttpClient.newHttpClient();
@@ -68,7 +68,7 @@ public class GrokClient implements GenericClientImpl {
 			r.setMessage(msg);
 
 			r.setValid(true);
-		} catch (Exception e) {
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 			r.setException(e);
 		}		

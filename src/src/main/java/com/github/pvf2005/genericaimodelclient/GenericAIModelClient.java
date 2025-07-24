@@ -12,6 +12,7 @@ import org.apache.commons.io.FileUtils;
 import com.github.pvf2005.genericaimodelclient.impl.GenericClientImpl;
 import com.github.pvf2005.genericaimodelclient.impl.GrokClient;
 import com.github.pvf2005.genericaimodelclient.impl.OllamaClient;
+import com.github.pvf2005.genericaimodelclient.impl.OpenAIClient;
 import com.github.pvf2005.genericaimodelclient.impl.Request;
 import com.github.pvf2005.genericaimodelclient.impl.Response;
 
@@ -36,7 +37,7 @@ public class GenericAIModelClient {
 		}else if(type.equalsIgnoreCase("grok")) {
 			this.client=new GrokClient();
 		}else if(type.equalsIgnoreCase("openai")) {
-			;
+			this.client=new OpenAIClient();
 		}
 		
 		if(this.client==null)return false;
@@ -72,7 +73,10 @@ public class GenericAIModelClient {
 	
 	public Response chat(Request req) {
 		initClient();
+		long start=System.currentTimeMillis();
 		Response r=this.client.chat(req);
+		long duration=System.currentTimeMillis()-start;
+		r.setDurationMillis(duration);
 		saveRequestResponse(req,r);
 		return r;
 	}

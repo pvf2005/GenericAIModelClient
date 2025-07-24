@@ -8,6 +8,8 @@ public class Request {
 	private List<Message> messages=null;
 	private String clientRequestStr=null;
 	private String id=null;
+	private String temperature=null;
+	private String seed=null;
 	
 	public Request() {;}
 	
@@ -22,7 +24,11 @@ public class Request {
 	
 	public void addMessage(String content) {
 		this.addMessage("user",content);
-	}	
+	}
+	
+	public void addMessage(Response resp) {
+		this.addMessage(resp.getMessage());
+	}
 
 	public List<Message> getMessages() {
 		return messages;
@@ -46,6 +52,22 @@ public class Request {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(String temperature) {
+		this.temperature = temperature;
+	}
+
+	public String getSeed() {
+		return seed;
+	}
+
+	public void setSeed(String seed) {
+		this.seed = seed;
 	}
 	
 	

@@ -18,13 +18,13 @@ public class App
         client.setModel("vicuna:latest");
         client.setEndpoint("http://127.0.0.1:11434/api/chat");
         
-        
         /*
         client.setType("grok");
         client.setModel("grok-4");
         client.setEndpoint("https://api.x.ai/v1/chat/completions");
         client.setKey(""); // GROK Key here
         */
+        
         
         //client.setSaveRequestsFolder(".");
         //client.setSaveResponsesFolder(".");

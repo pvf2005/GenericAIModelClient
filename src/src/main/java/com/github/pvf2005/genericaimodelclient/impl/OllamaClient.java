@@ -34,6 +34,14 @@ public class OllamaClient implements GenericClientImpl {
 		}
 		json.put("messages", msgArr);
 		json.put("stream", false);
+
+		if(req.getTemperature()!=null || req.getSeed()!=null) {
+			JSONObject opt=new JSONObject();
+			if(req.getTemperature()!=null)opt.put("temperature", Double.parseDouble(req.getTemperature()));
+			if(req.getSeed()!=null)opt.put("seed", Integer.parseInt(req.getSeed()));
+			json.put("options", opt);
+		}
+		
 		req.setClientRequestStr(json.toString());
 		
 		HttpClient client = HttpClient.newHttpClient();
