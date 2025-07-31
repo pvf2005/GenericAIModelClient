@@ -1,10 +1,11 @@
 package com.github.pvf2005.genericaimodelclient.impl;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,6 +14,12 @@ import com.github.pvf2005.genericaimodelclient.GenericAIModelClient;
 
 public class GrokClient implements GenericClientImpl {
 	GenericAIModelClient genericClient=null;
+	
+	@SuppressWarnings("serial")
+	private static final Map<String, Boolean> modelsWithReasoningSetting  = new HashMap<String, Boolean>() {{
+	    put("grok-3-mini", Boolean.TRUE);
+	    put("grok-3-mini-fast", Boolean.TRUE);
+	}};
 
 	@Override
 	public boolean init(GenericAIModelClient genericClient) {
@@ -20,6 +27,10 @@ public class GrokClient implements GenericClientImpl {
 		return true;
 	}
 
+	public boolean isReasoningSettingSupported(String model) {
+		return modelsWithReasoningSetting.containsKey(model);
+	}
+	
 	@Override
 	public Response chat(Request req) {
 		
@@ -37,6 +48,8 @@ public class GrokClient implements GenericClientImpl {
 
 		if(req.getTemperature()!=null)json.put("temperature", Double.parseDouble(req.getTemperature()));
 		if(req.getSeed()!=null)json.put("seed", Integer.parseInt(req.getSeed()));
+		if(req.getReasoningEffort()!=null && !isReasoningSettingSupported(this.genericClient.getModel()))
+			json.put("reasoning_effort", req.getReasoningEffort());
 		
 		req.setClientRequestStr(json.toString());
 		

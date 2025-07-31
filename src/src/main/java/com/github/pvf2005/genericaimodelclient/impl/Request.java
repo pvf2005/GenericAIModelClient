@@ -10,6 +10,7 @@ public class Request {
 	private String id=null;
 	private String temperature=null;
 	private String seed=null;
+	private String reasoningEffort=null;
 	
 	public Request() {;}
 	
@@ -68,6 +69,14 @@ public class Request {
 
 	public void setSeed(String seed) {
 		this.seed = seed;
+	}
+
+	public String getReasoningEffort() {
+		return reasoningEffort;
+	}
+
+	public void setReasoningEffort(String reasoningEffort) {
+		this.reasoningEffort = reasoningEffort;
 	}
 	
 	
