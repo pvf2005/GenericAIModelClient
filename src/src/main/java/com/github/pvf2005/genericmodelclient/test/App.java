@@ -14,9 +14,9 @@ public class App
     {
         GenericAIModelClient client=new GenericAIModelClient();
         
-        client.setType("ollama");
+        /*client.setType("ollama");
         client.setModel("vicuna:latest");
-        client.setEndpoint("http://127.0.0.1:11434/api/chat");
+        client.setEndpoint("http://127.0.0.1:11434/api/chat");*/
         
         /*
         client.setType("grok");
@@ -24,6 +24,12 @@ public class App
         client.setEndpoint("https://api.x.ai/v1/chat/completions");
         client.setKey(""); // GROK Key here
         */
+        
+        
+        client.setType("openai");
+        client.setModel("gpt-4o");
+        client.setEndpoint("https://api.openai.com/v1/responses");
+        client.setKey(""); // OpenAI Key here
         
         
         //client.setSaveRequestsFolder(".");

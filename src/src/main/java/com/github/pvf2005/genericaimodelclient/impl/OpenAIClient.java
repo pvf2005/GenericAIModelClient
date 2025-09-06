@@ -68,7 +68,7 @@ public class OpenAIClient implements GenericClientImpl {
 			r.setMessage(msg);
 
 			r.setValid(true);
-		} catch (IOException | InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			r.setException(e);
 		}		
