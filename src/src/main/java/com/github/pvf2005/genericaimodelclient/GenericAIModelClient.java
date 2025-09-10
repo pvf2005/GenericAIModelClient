@@ -13,6 +13,7 @@ import com.github.pvf2005.genericaimodelclient.impl.GenericClientImpl;
 import com.github.pvf2005.genericaimodelclient.impl.GrokClient;
 import com.github.pvf2005.genericaimodelclient.impl.OllamaClient;
 import com.github.pvf2005.genericaimodelclient.impl.OpenAIClient;
+import com.github.pvf2005.genericaimodelclient.impl.PublicAIClient;
 import com.github.pvf2005.genericaimodelclient.impl.Request;
 import com.github.pvf2005.genericaimodelclient.impl.Response;
 
@@ -38,6 +39,8 @@ public class GenericAIModelClient {
 			this.client=new GrokClient();
 		}else if(type.equalsIgnoreCase("openai")) {
 			this.client=new OpenAIClient();
+		}else if(type.equalsIgnoreCase("publicai")) {
+			this.client=new PublicAIClient();
 		}
 		
 		if(this.client==null)return false;
